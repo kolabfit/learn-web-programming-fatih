@@ -23,4 +23,3 @@ CSS3 is the latest version of CSS, introducing new features, selectors, and prop
 This repository serves as a starting point for learning and practicing web development fundamentals. It provides code examples, resources, and exercises to help you understand and apply HTML, CSS, HTML5, and CSS3 in your web projects.
 
 Feel free to explore the code and documentation in this repository, and dive into the world of web development!
-

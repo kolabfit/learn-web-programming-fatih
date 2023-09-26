@@ -7,7 +7,8 @@ class Employee
     public $name;
     public $position;
     public $salary;
-    Public function __construct($id,$name,$position,$salary){
+
+    Public function __construct($id=0,$name,$position,$salary=0){
         $this->id=$id;
         $this->name= $name ;
         $this->position =  $position;
@@ -17,9 +18,10 @@ class Employee
 
 
     // Menambahkan karyawan baru
-    public function create($name, $position, $salary)
+    public function create($id,$name, $position, $salary)
     {
         $employee = [
+            "id"=>$id , 
             'name' => $name,
             'position' => $position,
             'salary' => $salary
@@ -38,9 +40,9 @@ class Employee
     public function update($id, $name, $position, $salary)
     {
         if (isset($this->employees[$id])) {
-            $this->employees[$id]['name'] = $name;
-            $this->employees[$id]['position'] = $position;
-            $this->employees[$id]['salary'] = $salary;
+            $this->employees[$id]->['name'] = $name;
+            $this->employees[$id]->['position'] = $position;
+            $this->employees[$id]->['salary'] = $salary;
             return true;
         }
         return false;
@@ -62,9 +64,9 @@ class Employee
 $employeeSystem = new Employee();
 
 // Menambahkan karyawan
-$employeeSystem->create('John Cena', 'Manager', 50000);
-$employeeSystem->create('Jim Smith', 'Designer', 40000);
-$employeeSystem->create('mr.muh', 'project manager', 60000);
+$employeeSystem->create(1,'John Cena', 'Manager', 50000);
+$employeeSystem->create(2,'Jim Smith', 'Designer', 40000);
+$employeeSystem->create(3,'mr.muh', 'project manager', 60000);
 
 
 // Membaca daftar karyawan

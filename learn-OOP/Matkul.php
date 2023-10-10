@@ -1,78 +1,65 @@
 <?php
 
-class MatKul {
-    private $kode;
-    private $nama;
-    private $sks;
+class Matkul {
+    private $Kode;
+    private $Nama;
+    private $Sks;
 
-    public function __construct($kode, $nama, $sks) {
-        $this->kode = $kode;
-        $this->nama = $nama;
-        $this->sks = $sks;
+    public function __construct($Kode, $Nama, $Sks) {
+        $this->Kode = $Kode;
+        $this->Nama = $Nama;
+        $this->Sks = $Sks;
     }
 
     public function getKode() {
-        return $this->kode;
+        return $this->Kode;
     }
 
-    public function getNama() {
-        return $this->nama;
-    }
-
-    public function getSks() {
-        return $this->sks;
+    public function getMatkulInfo() {
+        return "{$this->Nama} ({$this->Sks} SKS)";
     }
 }
 
-class DaftarMataKuliah {
-    private $mataKuliah = [];
+class DaftarMatKul {
+    private $matKul = [];
 
-    public function tambahMataKuliah(MatKul $mataKuliah) {
-        $this->mataKuliah[] = $mataKuliah;
+    public function TambahMatkul(Matkul $matKul) {
+        $this->matKul[] = $matKul;
     }
 
-    public function hapusMataKuliah($kode) {
-        foreach ($this->mataKuliah as $key => $mataKuliah) {
-            if ($mataKuliah->getKode() == $kode) {
-                unset($this->mataKuliah[$key]);
+    public function HapusMatkul($Kode) {
+        foreach ($this->matKul as $key => $matkul) {
+            if ($matkul->getKode() == $Kode) {
+                unset($this->matKul[$key]);
             }
         }
     }
 
-    public function tampilkanDaftarMataKuliah() {
+    public function TampilMatkul() {
         echo "Daftar Mata Kuliah:";
         echo "<br>";
-        foreach ($this->mataKuliah as $mataKuliah) {
-            echo "Kode: " . $mataKuliah->getKode() . "\n";
-            echo "Nama: " . $mataKuliah->getNama() . "\n";
-            echo "SKS: " . $mataKuliah->getSks() . "\n";
-            echo "<br>";
+        foreach ($this->matKul as $matkul) {
+            echo "Kode: " . $matkul->getKode() . "<br>";
+            echo "Nama: " . $matkul->getMatkulInfo() . "<br>";
         }
-    }
+    }   
 }
 
-// Contoh instansiasi
-$daftarMatKul = new DaftarMataKuliah();
+$DaftarMatakuliah = [
+    ["kode" => "M001", "Nama" => "Matematika", "SKS" => "3"],
+    ["kode" => "B001", "Nama" => "Biologi", "SKS" => "3"],
+    ["kode" => "F001", "Nama" => "Fisika", "SKS" => "3"],
+    ["kode"=> "A001", "Nama" => "Alpro", "SKS"=>"4"],
+];
 
-// Menambahkan beberapa mata kuliah ke dalam daftar
-$mataKuliah1 = new MatKul("M001", "Matematika", 3);
-$mataKuliah2 = new MatKul("F001", "Fisika", 4);
-$mataKuliah3 = new MatKul("K005", "Kimia", 6);
-$mataKuliah4 = new MatKul("B007", "Biologi", 8);
+$daftar = new DaftarMatKul();
 
-$daftarMatKul->tambahMataKuliah($mataKuliah1);
-$daftarMatKul->tambahMataKuliah($mataKuliah2);
-$daftarMatKul->tambahMataKuliah($mataKuliah3);
-$daftarMatKul->tambahMataKuliah($mataKuliah4);
+foreach ($DaftarMatakuliah as $daftarmatkul) {
+    $matkul = new Matkul($daftarmatkul["kode"], $daftarmatkul["Nama"], $daftarmatkul["SKS"]);
+    $daftar->TambahMatkul($matkul);
+}
 
-// Menampilkan daftar mata kuliah
-$daftarMatKul->tampilkanDaftarMataKuliah();
-
-// Menghapus salah satu mata kuliah
-$daftarMatKul->hapusMataKuliah("M001");
-$daftarMatKul->hapusMataKuliah("B007");
-
-// Menampilkan daftar mata kuliah setelah menghapus
-$daftarMatKul->tampilkanDaftarMataKuliah();
+$daftar->HapusMatkul("B001");
+$daftar->TampilMatkul();
 
 ?>
